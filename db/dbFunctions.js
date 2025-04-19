@@ -40,6 +40,7 @@ const idStringToObjectID = (obj) => {
 
 const cfg = config()
 const connectDB = async () => {
+  yellow("HERE")
   try {
     if (!client) {
       client = await MongoClient.connect(cfg.mongoUri, {
@@ -47,8 +48,10 @@ const connectDB = async () => {
         useUnifiedTopology: true
       })
     }
+    yellow("error in try")
     return { db: client.db(cfg.dbName) }
   } catch (e) {
+    yellow("made it to catch")
     throw new Error(e)
   }
 }
@@ -102,7 +105,7 @@ export const insertMany = async (collection, data) => {
 export const dropCollection = async (collection) => {
   try {
     const { db } = await connectDB()
-
+    
     return await db.collection(collection).drop()
   } catch (e) {
     if (e.message === 'ns not found') {
