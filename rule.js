@@ -9,7 +9,7 @@ const Rule = {
   critera: {
     description: String,
     type: String,
-    cridit: Number,
+    credit: Number,
     debit: Number
   },
   actionType: {
@@ -20,7 +20,7 @@ const Rule = {
     replaceWithValue: String,
     category1: String,
     category2: String
-  }
+  }       
 }
 
 export default Rule
