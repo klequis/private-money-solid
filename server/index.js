@@ -15,6 +15,9 @@ import rules from 'routes/rules'
 import test from 'routes/test'
 import views from 'routes/views'
 
+// New Stuff Apr 2025
+import { find } from '../db'
+
 // eslint-disable-next-line
 import { redf, red, green } from '../logger'
 
@@ -33,6 +36,15 @@ app.use(morgan('dev'))
 app.get('/health', async (req, res) => {
   try {
     res.send(JSON.stringify({ status: 'All good here.' }))
+  } catch (e) {
+    res.send(JSON.stringify({ status: 'Something went wrong.' }))
+  }
+})
+
+app.get('/api/transactions', async (req, res) => {
+  try {
+    const r = await find("transactions") 
+    res.send(r)
   } catch (e) {
     res.send(JSON.stringify({ status: 'Something went wrong.' }))
   }
